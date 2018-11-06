@@ -1,16 +1,13 @@
 import './index.scss';
 import * as React from 'react';
 import { render } from 'react-dom';
-import { Stage, Graphics, AppContext, Container } from 'react-pixi-fiber';
-import background from './assets/img/background-1.png';
+import { Stage, AppContext, Container } from 'react-pixi-fiber';
 import * as PIXI from 'pixi.js';
 import { Background } from './Background';
 import { Rico } from './Rico';
-import { appendFile } from 'fs';
-export const backgroundTexture = PIXI.Texture.fromImage(background);
-backgroundTexture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
-const width = 720;
-export const height = 1080;
+import produce from 'immer';
+import { height, width } from './constants';
+
 interface Props {
   app: PIXI.Application;
 }
@@ -19,39 +16,67 @@ enum GameState {
   Game,
   GameOver,
 }
-class App extends React.Component<Props> {
-  state = { vy: 0, y: 200, pressTime: -1, gameState: GameState.Title };
+
+interface State {
+  vy: number;
+  y: number;
+  pressed: boolean;
+  pressTime: number;
+  gameState: GameState;
+}
+
+const initialGameState: State = {
+  vy: 0,
+  y: height / 5,
+  pressed: false,
+  pressTime: -1,
+  gameState: GameState.Title,
+};
+const limitHeight = height - 20;
+class App extends React.Component<Props, State> {
+  state = produce(initialGameState, _ => {});
   gameInit() {
-    this.setState({ vy: 0, y: 200, pressTime: -1, gameState: GameState.Game });
+    this.setState(
+      produce(initialGameState, s => {
+        s.gameState = GameState.Game;
+      })
+    );
   }
   handleClick = () => {
     const { gameState } = this.state;
     if (gameState === GameState.Title) {
       this.gameInit();
     } else if (gameState === GameState.Game) {
-      const { vy } = this.state;
-      this.setState({ pressTime: 0, vy: -11 });
+      this.setState({ pressTime: 0, vy: -11, pressed: true });
     } else if (gameState === GameState.GameOver) {
       this.gameInit();
     }
   };
   handlePointerUp = () => {
-    this.setState({ pressTime: -1 });
+    this.setState({ pressed: false });
   };
   handleTick = () => {
     const { gameState } = this.state;
     if (gameState === GameState.Game) {
-      const { y, vy, pressTime } = this.state;
-      const pressSpeed = pressTime === -1 ? 0 : Math.max(0, 5 - pressTime) * 1;
+      const { y, vy, pressed } = this.state;
 
-      const nextY = y + vy;
-      const gameOver = y > height;
+      const gameOver = y >= limitHeight;
+      const nextY = Math.min(y + vy, limitHeight);
+
       this.setState({
-        y: y + vy,
-        vy: vy + 0.6 - pressSpeed,
-        pressTime: pressTime === -1 ? -1 : pressTime + 1,
+        y: nextY,
+        vy: vy + 0.6,
         gameState: gameOver ? GameState.GameOver : gameState,
       });
+
+      if (pressed) {
+        const { pressTime } = this.state;
+        const pressAccel = Math.max(0, 5 - pressTime);
+        this.setState(state => ({
+          vy: state.vy - pressAccel,
+          pressTime: pressTime + 1,
+        }));
+      }
     }
   };
   componentDidMount() {
@@ -62,7 +87,7 @@ class App extends React.Component<Props> {
   }
   render() {
     const { app } = this.props;
-    const { y, vy } = this.state;
+    const { y, vy, gameState } = this.state;
     return (
       <Container>
         <Background
@@ -73,14 +98,15 @@ class App extends React.Component<Props> {
           buttonMode
           pointerdown={this.handleClick}
           pointerup={this.handlePointerUp}
+          stop={gameState !== GameState.Game}
         />
-        <Rico x={200} y={y} rotation={Math.atan2(vy, 20)} />
+        <Rico x={(width * 5) / 18} y={y} rotation={Math.atan2(vy, 20)} />
       </Container>
     );
   }
 }
 render(
-  <Stage width={720} height={1080} options={{ backgroundColor: 0xaaaaff }}>
+  <Stage width={width} height={height} options={{ backgroundColor: 0xaaaaff }}>
     <AppContext.Consumer>{app => <App app={app} />}</AppContext.Consumer>
   </Stage>,
   document.getElementById('root')

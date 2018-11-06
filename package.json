@@ -1,18 +1,23 @@
 {
   "dependencies": {
-    "@types/pixi.js": "^4.8.2",
-    "parcel": "^1.10.3",
+    "immer": "^1.7.4",
     "pixi.js": "^4.4.0",
     "react": "^16.6.0",
     "react-dom": "^16.0.0",
     "react-pixi-fiber": "^0.5.1"
   },
+  "homepage": "https://hibikinekage.github.io/flappy-rico",
   "scripts": {
-    "start": "parcel index.html"
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "predeploy": "parcel build index.html --public-url '/flappy-rico'",
+    "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
     "@types/react": "^16.4.18",
     "@types/react-dom": "^16.0.9",
+    "gh-pages": "^2.0.1",
+    "parcel": "^1.10.3",
     "sass": "^1.14.3",
     "typescript": "^3.1.6"
   }
