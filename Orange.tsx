@@ -10,9 +10,9 @@ export interface Props extends SpriteProperties {
 }
 const Orange = (props: Props) => {
   props.orangeTexture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
-  const scaleValue = height / props.orangeTexture.baseTexture.height / 10
+  const scaleValue = height / props.orangeTexture.baseTexture.height / 4;
   const scale = new PIXI.Point(scaleValue, scaleValue);
-  return <Sprite scale={scale} {...props} />;
+  return <Sprite scale={scale} {...props} texture={props.orangeTexture} />;
 };
 export default resource<'orangeTexture', Props>('orangeTexture', orange)(
   Orange

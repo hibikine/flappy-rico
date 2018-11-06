@@ -39,7 +39,7 @@ interface State {
   orangeTime: number;
 }
 
-const orangeDuration = 60;
+const orangeDuration = 50;
 
 const initialGameState: State = {
   vy: 0,
@@ -50,8 +50,9 @@ const initialGameState: State = {
   oranges: [],
   gameState: GameState.Title,
 };
+const gravity = 0.8;
 const limitHeight = height - 20;
-const orangeMoveSpeed = width / 100;
+const orangeMoveSpeed = width / 50;
 const moveOrange = (orange: OrangeState): OrangeState => ({
   ...orange,
   x: orange.x - orangeMoveSpeed,
@@ -90,24 +91,23 @@ class App extends React.Component<Props, State> {
 
       this.setState({
         y: nextY,
-        vy: vy + 0.6,
+        vy: vy + gravity,
         gameState: gameOver ? GameState.GameOver : gameState,
         oranges: newOranges,
         orangeTime: orangeTime + 1,
       });
 
       if (orangeTime + 1 >= orangeDuration) {
-        const randomY = (Math.random() * height) / 3 + height / 3;
+        const randomY = (Math.random() * height) / 3;
+        const orangeSpace = height / 1.8;
         const additionalOranges = new Array(2).fill(0).map(
           (_, i): OrangeState => ({
             x: width * 2,
-            y: randomY + (i === 0 ? 0 : height / 3),
+            y: randomY + (i === 0 ? 0 : orangeSpace),
             isUp: i === 0,
             orangeId: getRandomId(),
           })
         );
-        console.log(additionalOranges);
-        console.log(oranges);
         this.setState(state => ({
           orangeTime: 0,
           oranges: [...state.oranges, ...additionalOranges],
@@ -145,7 +145,6 @@ class App extends React.Component<Props, State> {
           pointerup={this.handlePointerUp}
           stop={gameState !== GameState.Game}
         />
-        <Orange x={0} y={0}/>
         {oranges.map(({ x, y, orangeId }) => (
           <Orange key={orangeId} x={x} y={y} />
         ))}
