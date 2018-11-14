@@ -4,12 +4,15 @@ import { render } from 'react-dom';
 import { Stage, AppContext, Container } from 'react-pixi-fiber';
 import * as PIXI from 'pixi.js';
 import Background from './Background';
-import { Rico } from './Rico';
+import Rico from './Rico';
+import { ricoX } from './Rico/consts';
 import produce from 'immer';
 import { height, width } from './constants';
 import Orange from './Orange';
 import load from './resources';
 import { ResourceProvider } from './ResourceContext';
+import isHit from './isHit';
+import { orangeSize } from './Orange/consts';
 
 const getRandomId = (): number =>
   window.crypto.getRandomValues(new Uint32Array(1))[0];
@@ -58,6 +61,18 @@ const moveOrange = (orange: OrangeState): OrangeState => ({
   x: orange.x - orangeMoveSpeed,
 });
 const removeOrange = ({ x }: OrangeState): boolean => x > -width;
+const createNewOranges = (): OrangeState[] => {
+  const randomY = (Math.random() * height) / 3;
+  const orangeSpace = height / 1.8;
+  return new Array(2).fill(0).map(
+    (_, i): OrangeState => ({
+      x: width + orangeSize,
+      y: randomY + (i === 0 ? 0 : orangeSpace),
+      isUp: i === 0,
+      orangeId: getRandomId(),
+    })
+  );
+};
 class App extends React.Component<Props, State> {
   state = produce(initialGameState, _ => {});
   gameInit() {
@@ -80,12 +95,25 @@ class App extends React.Component<Props, State> {
   handlePointerUp = () => {
     this.setState({ pressed: false });
   };
+  gameOver(): boolean {
+    const { y, oranges } = this.state;
+    if (y >= limitHeight) {
+      return true;
+    }
+    for (const o of oranges) {
+      if (isHit(y, o)) {
+        console.log(ricoX, y, o);
+        return true;
+      }
+    }
+    return false;
+  }
   handleTick = () => {
     const { gameState } = this.state;
     if (gameState === GameState.Game) {
       const { y, vy, pressed, orangeTime, oranges } = this.state;
 
-      const gameOver = y >= limitHeight;
+      const gameOver = this.gameOver();
       const nextY = Math.min(y + vy, limitHeight);
       const newOranges = oranges.map(moveOrange).filter(removeOrange);
 
@@ -98,16 +126,7 @@ class App extends React.Component<Props, State> {
       });
 
       if (orangeTime + 1 >= orangeDuration) {
-        const randomY = (Math.random() * height) / 3;
-        const orangeSpace = height / 1.8;
-        const additionalOranges = new Array(2).fill(0).map(
-          (_, i): OrangeState => ({
-            x: width * 2,
-            y: randomY + (i === 0 ? 0 : orangeSpace),
-            isUp: i === 0,
-            orangeId: getRandomId(),
-          })
-        );
+        const additionalOranges = createNewOranges();
         this.setState(state => ({
           orangeTime: 0,
           oranges: [...state.oranges, ...additionalOranges],
@@ -148,7 +167,8 @@ class App extends React.Component<Props, State> {
         {oranges.map(({ x, y, orangeId }) => (
           <Orange key={orangeId} x={x} y={y} />
         ))}
-        <Rico x={(width * 5) / 18} y={y} rotation={Math.atan2(vy, 20)} />
+        <Rico y={y} rotation={Math.atan2(vy, 20)} />
+        <Rico x={100} y={100} rotation={Math.atan2(vy,20)} />
       </Container>
     );
   }

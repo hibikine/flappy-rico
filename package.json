@@ -14,11 +14,14 @@
     "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
+    "@types/jest": "^23.3.9",
     "@types/react": "^16.4.18",
     "@types/react-dom": "^16.0.9",
     "gh-pages": "^2.0.1",
+    "jest": "^23.6.0",
     "parcel": "^1.10.3",
     "sass": "^1.14.3",
+    "ts-jest": "^23.10.4",
     "typescript": "^3.1.6"
   }
 }
