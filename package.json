@@ -9,7 +9,7 @@
   "homepage": "https://hibikinekage.github.io/flappy-rico",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html",
+    "build": "parcel build index.html --public-url '/ricopyon'",
     "predeploy": "parcel build index.html --public-url '/flappy-rico'",
     "deploy": "gh-pages -d dist"
   },
