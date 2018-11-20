@@ -13,7 +13,7 @@ before_deploy:
   - ssh-add /tmp/deploy_rsa
 deploy:
   provider: script
-  skip_cleanup: false
+  skip_cleanup: true
   script: rsync -avn --delete $TRAVIS_BUILD_DIR/dist $HOST_USER/$DEPLOY_HOST:$DEPLOY_PATH
   on:
     branch: master
