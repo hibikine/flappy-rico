@@ -5,6 +5,7 @@ import { Stage, AppContext, Container } from 'react-pixi-fiber';
 import * as PIXI from 'pixi.js';
 import Background from './Background';
 import Rico from './Rico';
+import Bar from './Bar';
 import { ricoX } from './Rico/consts';
 import produce from 'immer';
 import { height, width } from './constants';
@@ -13,7 +14,6 @@ import load from './resources';
 import { ResourceProvider } from './ResourceContext';
 import isHit from './isHit';
 import { orangeSize } from './Orange/consts';
-
 const getRandomId = (): number =>
   window.crypto.getRandomValues(new Uint32Array(1))[0];
 
@@ -165,10 +165,13 @@ class App extends React.Component<Props, State> {
           stop={gameState !== GameState.Game}
         />
         {oranges.map(({ x, y, orangeId }) => (
-          <Orange key={orangeId} x={x} y={y} />
+          <Container key={orangeId}>
+            <Orange x={x} y={y} />
+            <Bar x={x} y={y} />
+          </Container>
         ))}
         <Rico y={y} rotation={Math.atan2(vy, 20)} />
-        <Rico x={100} y={100} rotation={Math.atan2(vy,20)} />
+        <Bar x={16} y={16} />
       </Container>
     );
   }

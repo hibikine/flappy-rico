@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Sprite, SpriteProperties } from 'react-pixi-fiber';
-import rico from './assets/img/rico.png';
-import { Texture, Point, ObservablePoint } from 'pixi.js';
+import rico from '../assets/img/rico.png';
+import { Texture, Point } from 'pixi.js';
 import { resource } from '../ResourceContext';
 import { ricoSize, ricoX } from './consts';
 

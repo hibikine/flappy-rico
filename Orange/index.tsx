@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Sprite, SpriteProperties } from 'react-pixi-fiber';
-import orange from './assets/img/orange.png';
+import orange from '../assets/img/orange.png';
 import * as PIXI from 'pixi.js';
 import { resource } from '../ResourceContext';
 import { orangeSize } from './consts';

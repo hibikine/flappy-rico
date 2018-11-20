@@ -61,21 +61,6 @@ class Background extends React.Component<Props> {
     );
   }
 }
-/*export default (
-  props: Pick<Props, Exclude<keyof Props, 'backgroundTexture'>>
-) => (
-  <ResourceConsumer>
-    {(resources) => {
-      console.log(resources);
-      return (
-        <Background
-          backgroundTexture={resources[background].texture}
-          {...props}
-        />
-      );
-    }}
-  </ResourceConsumer>
-);*/
 
 export default resource<'backgroundTexture', Props>(
   'backgroundTexture',
