@@ -12,7 +12,7 @@ import { height, width } from './constants';
 import Orange from './Orange';
 import load from './resources';
 import { ResourceProvider } from './ResourceContext';
-import isHit from './isHit';
+import isHit, { isBarHit } from './isHit';
 import { orangeSize } from './Orange/consts';
 const getRandomId = (): number =>
   window.crypto.getRandomValues(new Uint32Array(1))[0];
@@ -96,12 +96,12 @@ class App extends React.Component<Props, State> {
     this.setState({ pressed: false });
   };
   gameOver(): boolean {
-    const { y, oranges } = this.state;
+    const { x, y, oranges } = this.state;
     if (y >= limitHeight) {
       return true;
     }
     for (const o of oranges) {
-      if (isHit(y, o)) {
+      if (isHit(y, o) || isBarHit({ x, y }, o)) {
         console.log(ricoX, y, o);
         return true;
       }
@@ -164,14 +164,13 @@ class App extends React.Component<Props, State> {
           pointerup={this.handlePointerUp}
           stop={gameState !== GameState.Game}
         />
-        {oranges.map(({ x, y, orangeId }) => (
+        {oranges.map(({ x, y, orangeId, isUp }) => (
           <Container key={orangeId}>
+            <Bar x={x} y={y} isUp={isUp} />
             <Orange x={x} y={y} />
-            <Bar x={x} y={y} />
           </Container>
         ))}
         <Rico y={y} rotation={Math.atan2(vy, 20)} />
-        <Bar x={16} y={16} />
       </Container>
     );
   }
