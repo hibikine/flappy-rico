@@ -9,7 +9,11 @@ export default (ricoY: number, { x, y }: { x: number; y: number }) =>
 export const isBarHit = (
   rico: { x: number; y: number },
   orange: { x: number; y: number; isUp: boolean }
-) =>
-  orange.x - ricoSize-barSize < rico.x &&
-  orange.x + barSize+ricoSize > rico.x &&
-  (orange.isUp ? orange.y < rico.y : orange.y > rico.y);
+) => {
+  if (orange.x - ricoSize - barSize < rico.x) {
+    if (orange.x + barSize + ricoSize > rico.x) {
+      return orange.isUp ? orange.y > rico.y : orange.y < rico.y;
+    }
+  }
+  return false;
+};

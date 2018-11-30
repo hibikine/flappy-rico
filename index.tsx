@@ -96,12 +96,12 @@ class App extends React.Component<Props, State> {
     this.setState({ pressed: false });
   };
   gameOver(): boolean {
-    const { x, y, oranges } = this.state;
+    const { y, oranges } = this.state;
     if (y >= limitHeight) {
       return true;
     }
     for (const o of oranges) {
-      if (isHit(y, o) || isBarHit({ x, y }, o)) {
+      if (isHit(y, o) || isBarHit(({ x:ricoX, y }), o)) {
         console.log(ricoX, y, o);
         return true;
       }
