@@ -1,0 +1,34 @@
+= Flappy Rico
+
+Tap and Jump
+
+image::https://raw.githubusercontent.com/HibikineKage/flappy-rico/master/game.png[Game Image]
+
+== How to play
+
+. Access to https://hibikinekage.github.io/flappy-rico
+. Tap or click your screen
+
+== Stacks
+
+* https://github.com/michalochman/react-pixi-fiber[react-pixi-fiber]
+* React
+* TypeScript
+* Parcel
+
+== Development
+
+=== Requirement
+
+* Yarn
+
+```
+yarn
+yarn start
+```
+
+=== Deployment
+
+```
+yarn deploy
+```
