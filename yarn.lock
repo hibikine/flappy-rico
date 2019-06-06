@@ -3134,10 +3134,10 @@ ignore-walk@^3.0.1:
   dependencies:
     minimatch "^3.0.4"
 
-immer@^1.7.4:
-  version "1.7.4"
-  resolved "https://registry.yarnpkg.com/immer/-/immer-1.7.4.tgz#b9a833a61cbeee477a3694870b172c590837a963"
-  integrity sha512-mZpvQe9LXc+lg3hhcT/2M6Apej43FSs6hS2Bt4HrQxyI6hVJugukLgH2KdSBL/fIOmahHmQvpWU37BWzFLDp1Q==
+immer@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-3.1.2.tgz#1f24f2e25433f5ff168a1ff6c8c6366d2106e61a"
+  integrity sha512-pi8JuvJ9c+98DlpDms/o0YLLg5khP8Qzjd8CtIGc4qVm2eoLdQGivJL266nWccofKT/oBSxnhAh/o+nmOXtLXw==
 
 import-local@^1.0.0:
   version "1.0.0"

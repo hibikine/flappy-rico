@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "immer": "^1.7.4",
+    "immer": "^3.1.2",
     "pixi.js": "^4.4.0",
     "react": "^16.6.0",
     "react-dom": "^16.0.0",
