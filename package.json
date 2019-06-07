@@ -20,7 +20,7 @@
     "@types/react-dom": "^16.0.9",
     "gh-pages": "^2.0.1",
     "jest": "^23.6.0",
-    "parcel": "^1.10.3",
+    "parcel": "^1.12.3",
     "sass": "^1.14.3",
     "ts-jest": "^23.10.4",
     "typescript": "^3.1.6"
