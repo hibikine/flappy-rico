@@ -5687,24 +5687,24 @@ react-dom@^16.8.6:
     prop-types "^15.6.2"
     scheduler "^0.13.6"
 
-react-pixi-fiber@^0.5.1:
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/react-pixi-fiber/-/react-pixi-fiber-0.5.1.tgz#d9ef011b6a47f8ef87c46ad98d9d08f1bb540c43"
-  integrity sha512-FyMjERjnZNK5udvJWyalFquCllrAhz3i1bFsKGSXj83mKzkfbE58Z/J7tDWJiAHT+32UlwK7terVa5FEIRZdVg==
+react-pixi-fiber@^0.8.1:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/react-pixi-fiber/-/react-pixi-fiber-0.8.1.tgz#e09b24a9ce374c01e74b1916e8767ba4a0341df6"
+  integrity sha512-E01cZ1pMex7HFocDcmQKcc1FEGZT1winvf1ZsDmHUGmuRNk2uZ10128CyZmQVQIMWiyHq4WQizyO2fRjQazEnA==
   dependencies:
     fbjs "^0.8.0"
     performance-now "^2.1.0"
-    react-reconciler "^0.13.0"
+    react-reconciler "^0.17.0"
 
-react-reconciler@^0.13.0:
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/react-reconciler/-/react-reconciler-0.13.0.tgz#89a5ff1403d03fee2b8760d515b133ff3d87a044"
-  integrity sha512-7e/EEUgYTYy29p2fgcEhNm1I159IKs5Kk+4QW4Y5AwyD8Y4GZ8M03ZhMhRz8gifG8XFks2vbdpRIT5QGfRPYHw==
+react-reconciler@^0.17.0:
+  version "0.17.2"
+  resolved "https://registry.yarnpkg.com/react-reconciler/-/react-reconciler-0.17.2.tgz#cabe8cb403793f6462842e07b525c3b61c4f5cde"
+  integrity sha512-V3WjUlYgMjWWRQH5lzMMsy1jMDL28pInmwfCsKoOGqNQ0TN2DQHKBzycgFnZsiL3NoIb52GQtQgkYGeDDDoN+g==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.2"
-    schedule "^0.3.0"
+    scheduler "^0.11.2"
 
 react@^16.8.6:
   version "16.8.6"
@@ -6076,11 +6076,12 @@ sax@^1.2.4, sax@~1.2.4:
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
   integrity sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==
 
-schedule@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/schedule/-/schedule-0.3.0.tgz#1be2ab2fc2e768536269ce7326efb478d6c045e8"
-  integrity sha512-20+1KVo517sR7Nt+bYBN8a+bEJDKLPEx7Ohtts1kX05E4/HY53YUNuhfkVNItmWAnBYHcpG9vsd2/CJxG+aPCQ==
+scheduler@^0.11.2:
+  version "0.11.3"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.11.3.tgz#b5769b90cf8b1464f3f3cfcafe8e3cd7555a2d6b"
+  integrity sha512-i9X9VRRVZDd3xZw10NY5Z2cVMbdYg6gqFecfj79USv1CFN+YrJ3gIPRKf1qlY+Sxly4djoKdfx1T+m9dnRB8kQ==
   dependencies:
+    loose-envify "^1.1.0"
     object-assign "^4.1.1"
 
 scheduler@^0.13.6:
