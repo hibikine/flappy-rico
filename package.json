@@ -23,6 +23,6 @@
     "parcel": "^1.12.3",
     "sass": "^1.22.10",
     "ts-jest": "^24.0.2",
-    "typescript": "^3.5.3"
+    "typescript": "^3.7.2"
   }
 }
