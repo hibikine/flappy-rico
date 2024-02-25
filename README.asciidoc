@@ -6,7 +6,7 @@ image::https://raw.githubusercontent.com/HibikineKage/flappy-rico/master/game.pn
 
 == How to play
 
-. Access to https://hibikinekage.github.io/flappy-rico
+. Access to https://hibikine.github.io/flappy-rico
 . Tap or click your screen
 
 == Stacks
